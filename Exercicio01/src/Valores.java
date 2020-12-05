@@ -1,84 +1,47 @@
+
 public class Valores implements ValoresITF{
 	
-	//ArrayList<Integer> array = new ArrayList();
-	int array[] = new int[10];
+	int lista[] = new int[10];
 
-	@Override
 	public boolean ins(int v) {
-		
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] == 0) {
-				array[i] = v;
+		for (int i=0; i<lista.length; i++) {
+			if(lista[i] == 0 && v > 0) {
+				lista[i] = v;
 				return true;
 			}
 		}
-//		if(v > 0 && array.size() <= 10) {
-//			array.add(v);
-//			return true;
-//		}
-		
 		return false;
-		
 	}
 
-	@Override
 	public int del(int i) {
-		
-//		if (array.size() == 0) {
-//			return -1;
-//		}
-//		
-//		array.remove(i);
-//		return array.get(i);
-		
 		int aux = 0;
 		boolean flag = false;
-		
-		for (int j = 0; j < array.length; j++) {
-			if (array[j] != 0) {
+		for(int e=0; e<lista.length; e++) {
+			if(lista[i] != 0) {
 				flag = true;
 			}
 		}
-		
-		if (flag) {
-			if (i >= 0 && i <= 9) {
-				 aux = array[i];
-				 array[i] = 0;
-				
+		if(flag) {
+			if(i >= 0 && i <= 9) {
+				aux = lista[i];
+				lista[i] = 0;
 			}
 			return aux;
+		}else {
+			return -1;
 		}
-		
-		return -1;
-		
 	}
 
-	@Override
 	public int size() {
-		
-//		return array.size();
-		
-		int cont = 0;
-		
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] != 0) {
-				cont++;
+		int count = 0;
+		for(int i=0; i<lista.length; i++) {
+			if(lista[i] != 0) {
+				count = count+1;
 			}
 		}
-		return cont;
-		
+		return count;
 	}
 	
-	public void zerarArray() {
-		
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] != 0) {
-				array[i] = 0;
-			}
-		}
-		
-	}
 	
 	
 }
-

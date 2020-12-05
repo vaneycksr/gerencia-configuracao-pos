@@ -1,43 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<project name="Projeto Valores" default="main" basedir=".">
 
-
-<project name="Exercicio 02" basedir=".">
 	<description>
-		Exercicio 02
+		Um simples projeto com manipulção de valores em um Array.
 	</description>
 
-	<!-- global properties for this build file -->
 	<property name="source.dir" location="src" />
 	<property name="build.dir" location="bin" />
 	<property name="doc.dir" location="doc" />
-	<property name="jar.dir" location="jar" />
-	
+	<property name="junit.dir" location="lib" />
 
-	<!-- set up some directories used by this project -->
+	<junit printsummary="yes" haltonfailure="yes">
+		<classpath id="junit-classpath">
+			<fileset dir="${junit.dir}">
+				<include name="**/junit-4.13.1.jar" />
+			</fileset>
+		</classpath>
+	</junit>
+
 	<target name="init" description="setup project directories">
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${doc.dir}" />
-		<mkdir dir="${jar.dir}" />
 	</target>
 
-	<!-- compila -->
 	<target name="compile" description="compile java sources">
-		<javac srcdir="${source.dir}" destdir="${build.dir}"
-			includeantruntime="false" />
+		<javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
+			<classpath refid="junit-classpath" />
+		</javac>
 	</target>
 
-	<!-- gera javadosc -->
 	<target name="doc" description="generate documentation">
-		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" />
+		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}">
+			<classpath refid="junit-classpath" />
+			<fileset dir="." />
+		</javadoc>
 	</target>
 
-	<target name="jar" description="empacotar binarios" depends="compile">
-		<jar basedir="jar" destfile="${jar.dir}" />
+	<target name="clean" description="Limpeza no Workspace">
+		<delete dir="${build.dir}" />
+		<delete dir="${doc.dir}" />
+		<delete>
+			<fileset defaultexcludes="no" dir="${source.dir}" includes="**/*~" />
+		</delete>
 	</target>
+
+	<target name="jar">
+		<mkdir dir="bin/jar" />
+		<jar destfile="bin/jar/aplicacao.jar" basedir="bin" />
+	</target>
+
+	<target name="main" depends="clean, init, compile, doc, jar" />
 
 </project>
-
-
-
-
-
