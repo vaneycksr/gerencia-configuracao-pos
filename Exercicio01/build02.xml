@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project name="Exercicio 02" basedir=".">
+	<description>
+		Exercicio 02
+	</description>
+
+	<!-- global properties for this build file -->
+	<property name="source.dir" location="src" />
+	<property name="build.dir" location="bin" />
+	<property name="doc.dir" location="doc" />
+	<property name="jar.dir" location="jar" />
+	
+
+	<!-- set up some directories used by this project -->
+	<target name="init" description="setup project directories">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${doc.dir}" />
+		<mkdir dir="${jar.dir}" />
+	</target>
+
+	<!-- compila -->
+	<target name="compile" description="compile java sources">
+		<javac srcdir="${source.dir}" destdir="${build.dir}"
+			includeantruntime="false" />
+	</target>
+
+	<!-- gera javadosc -->
+	<target name="doc" description="generate documentation">
+		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}" />
+	</target>
+
+	<target name="jar" description="empacotar binarios" depends="compile">
+		<jar basedir="jar" destfile="${jar.dir}" />
+	</target>
+
+</project>
+
+
+
+
+
